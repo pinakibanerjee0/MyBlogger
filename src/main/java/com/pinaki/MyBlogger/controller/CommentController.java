@@ -14,8 +14,11 @@ import com.pinaki.MyBlogger.payloads.ApiResponse;
 import com.pinaki.MyBlogger.payloads.CommentDto;
 import com.pinaki.MyBlogger.services.CommentService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/v1/")
+@Tag(name = "Comment Management", description = "Comment management APIs")
 public class CommentController {
 
 	@Autowired

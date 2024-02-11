@@ -28,10 +28,12 @@ import com.pinaki.MyBlogger.payloads.PostResponse;
 import com.pinaki.MyBlogger.services.FileService;
 import com.pinaki.MyBlogger.services.PostService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/api/v1/")
+@Tag(name = "Post Management", description = "Post management APIs")
 public class PostController {
 
 	@Autowired

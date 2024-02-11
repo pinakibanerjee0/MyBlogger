@@ -8,7 +8,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -29,8 +29,8 @@ import com.pinaki.MyBlogger.security.JwtAuthenticationFilter;
 @Configuration
 @EnableWebSecurity
 @EnableWebMvc
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
-@EnableMethodSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableMethodSecurity
 public class SecurityConfig {
 
 	public static final String[] PUBLIC_URLS = { "/api/v1/auth/**", "/v3/api-docs", "/v2/api-docs",
@@ -50,7 +50,7 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-		http.csrf().disable().authorizeHttpRequests().requestMatchers("/api/v1/auth/login").permitAll().requestMatchers(HttpMethod.GET)
+		http.csrf().disable().authorizeHttpRequests().requestMatchers(PUBLIC_URLS).permitAll().requestMatchers(HttpMethod.GET)
 				.permitAll().anyRequest().authenticated().and().exceptionHandling()
 				.authenticationEntryPoint(this.jwtAuthenticationEntryPoint).and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);

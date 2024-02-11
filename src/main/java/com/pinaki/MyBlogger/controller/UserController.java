@@ -19,10 +19,13 @@ import com.pinaki.MyBlogger.payloads.ApiResponse;
 import com.pinaki.MyBlogger.payloads.UserDto;
 import com.pinaki.MyBlogger.services.UserService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/users")
+@Tag(name = "User Management", description = "User management APIs")
 public class UserController {
 
 	@Autowired
@@ -46,7 +49,7 @@ public class UserController {
 
 	// ADMIN
 	// DELETE -delete user
-	//@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{userId}")
 	public ResponseEntity<ApiResponse> deleteUser(@PathVariable("userId") Integer uid) {
 		this.userService.deleteUser(uid);
@@ -54,6 +57,22 @@ public class UserController {
 	}
 
 	// GET - user get
+	@Operation(summary = "Retrieve a User by Id", description = "Get a User object by specifying its id. The response is User object with id, title, description and published status.", tags = {
+			"Users", "get" })
+	/*
+	 * @ApiResponses({
+	 * 
+	 * @ApiResponse(responseCode = "200", content = { @Content(schema
+	 * = @Schema(implementation = UserDto.class), mediaType = "application/json")
+	 * }),
+	 * 
+	 * @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema())
+	 * }),
+	 * 
+	 * @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema())
+	 * }) })
+	 */
+
 	@GetMapping("/")
 	public ResponseEntity<List<UserDto>> getAllUsers() {
 		return ResponseEntity.ok(this.userService.getAllUsers());

@@ -18,10 +18,12 @@ import com.pinaki.MyBlogger.payloads.ApiResponse;
 import com.pinaki.MyBlogger.payloads.CategoryDto;
 import com.pinaki.MyBlogger.services.CategoryService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/categories")
+@Tag(name = "Category Management", description = "Category management APIs")
 public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;

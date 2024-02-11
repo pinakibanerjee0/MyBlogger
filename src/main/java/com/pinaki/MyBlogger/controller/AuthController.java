@@ -26,10 +26,12 @@ import com.pinaki.MyBlogger.repositories.UserRepo;
 import com.pinaki.MyBlogger.security.JwtTokenHelper;
 import com.pinaki.MyBlogger.services.UserService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/auth/")
+@Tag(name = "Auth Management", description = "Auth management APIs")
 public class AuthController {
 
 	@Autowired
